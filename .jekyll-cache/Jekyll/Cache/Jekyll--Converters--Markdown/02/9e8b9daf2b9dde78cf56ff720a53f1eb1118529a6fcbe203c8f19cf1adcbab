@@ -1,0 +1,21 @@
+I"�
+<p>Code for this part of my project can be found <a href="https://github.com/thebrianjohns/hockeycaphits/blob/main/Brian%20Johns%20Capstone%20%232%20-%20Regression%20Modeling.ipynb">HERE</a></p>
+
+<p>This notebook starts with some Exploratory Data Analysis of cleaned data comprising of NHL salaries and statistics.  Utilizing the <strong>seaborn</strong> library, I visualized the distributions of each feature and the linear relationships between each feature and the target variable, an NHL player’s Cap Hit.  As a result of the EDA, I used log and bimodal transformations in order to normalize the distributions of some of the data.  The data was then split into Train/Test sets in preparation for modeling.</p>
+
+<p>I utilized the <strong>scikit-learn</strong> library in order to scale and then model the data.  I ran Linear Regression, Decision Tree, Random Forest and XGBoost models in order to make predictions about the NHL player’s Cap Hits.  I measured R-squared, as well as Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE), in order to evaluate the performance of each model.  In the end, the XGBoost Regressor was the highest performing model, with an R-Squared value of 67.9%, MAE of 0.94 and RMSE of 1.29.</p>
+
+<p>Given the complexity of an XGBoost model, I used plot importance and <strong>Shapley values</strong> to interpret the results of the model.  Using this, there were five major predictors for a player’s Cap Hit:</p>
+
+<ol>
+  <li>The player’s age</li>
+  <li>The player’s draft placement</li>
+  <li>The amount time on ice spent during a powerplay</li>
+  <li>The actual number of goals scored for their team while the player was on the ice</li>
+  <li>The number of <em>expected</em> goals scored for their team while the player was on the ice.</li>
+</ol>
+
+<p>It came as no surprise that, based on the model, that some of the players that had Cap Hits significantly lower than what the model predicted were outstanding young players that had not had their first contract extension, thus being limited to the rookie salary scale.  What was more of a surprise is that aging veterans, often older than 35 but still produced at a high level, were also consistently undervalued.  The biggest surprise was that the max value for a player’s cap hit in the model was $9.5 million, nearly $3 million lower than the actual max cap hit.  This would seem to intimate that the players may not be worth the most expensive contracts in the league, even if their performance exceeds MVP levels.</p>
+
+<p>To get a better sense of the differentiation between players, I decided to run Clustering models in an attempt to group players based on their statistics.  This can be found in Part 3 of my Capstone Project.</p>
+:ET
