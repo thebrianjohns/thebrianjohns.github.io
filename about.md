@@ -16,6 +16,6 @@ With this experience, I am now proficient in the following skills to find Data S
 - Data Visualizations with **Tableau**, **Matplotlib**, **Seaborn** and **Plotly Express**
 - Leveraging **Amazon Web Services (AWS)** to find Big Data solutions with tools such as **Hadoop**, **Spark**, **Hive** and **SageMaker**
 
-You can see the projects that I have worked on in my [PORTFOLIO](http://127.0.0.1:4000/posts/) or on my [GitHub Page](https://github.com/thebrianjohns)
+You can see the projects that I have worked on in my [Portfolio](https://thebrianjohns.github.io/posts/) or on my [GitHub Page](https://github.com/thebrianjohns)
 
-Feel free to contact me [HERE](http://127.0.0.1:4000/contact) or reach out to me on [LinkedIn](https://www.linkedin.com/in/thebrianjohns/) to discuss how I can swim through your data to find high performance solutions!
+Feel free to reach out to me on [LinkedIn](https://www.linkedin.com/in/thebrianjohns/) to discuss how I can swim through your data to find high performance solutions!
