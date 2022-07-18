@@ -20,4 +20,4 @@ Plotting players by their cluster within each team, and in particular the Stanle
 
 A recap of my entire BrainStation Capstone Project can be found [HERE](https://github.com/thebrianjohns/hockeycaphits/blob/main/Brian%20Johns%20Capstone%20%234%20-%20Findings.ipynb).
 
-The final draft of the business report, including a summary of my findings and visualizations to support them, can be found [HERE]()
+The final draft of the business report, including a summary of my findings and visualizations to support them, can be found <a href="https://thebrianjohns.github.io/Brian%20Johns%20Capstone%20-%20Report.pdf" target="_blank">HERE</a>
