@@ -10,7 +10,7 @@ Code for this project can be found [HERE](https://github.com/thebrianjohns/hocke
 
 My first notebook introduces the problem space for my Capstone project by giving some financial background of the NHL and asking my business question: **How can we predict and evaluate the Cap Hits of NHL players using their basic and advanced statistics?**
 
-To answer this, I acquired data from two sources:
+In order to answer this, I acquired data from two sources:
 1. [<u>CapFriendly</u>](https://www.capfriendly.com/) for NHL financial information, such as salaries and cap hits.
 2. [<u>Evolving Hockey</u>](https://evolving-hockey.com/) for on-ice performance statistics for NHL players.
 
