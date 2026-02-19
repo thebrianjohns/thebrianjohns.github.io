@@ -1,4 +1,470 @@
----
-layout: home
-background: '/img/homepage-water.jpg'
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brian Johns — Data Scientist &amp; Sports Analyst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:   #0d1b2a;
+      --navy2:  #132336;
+      --slate:  #1e3a52;
+      --gold:   #c9a84c;
+      --gold2:  #e8c96a;
+      --cream:  #f5f0e8;
+      --off:    #e8e4dc;
+      --muted:  #8da0b0;
+      --font-d: 'Bebas Neue', sans-serif;
+      --font-b: 'Crimson Pro', Georgia, serif;
+      --font-m: 'DM Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--cream); font-family: var(--font-b); font-size: 18px; line-height: 1.65; overflow-x: hidden; }
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { color: var(--gold2); }
+    img { display: block; max-width: 100%; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 4rem;
+      background: rgba(13,27,42,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .nav-logo { font-family: var(--font-d); font-size: 1.4rem; letter-spacing: 0.12em; color: var(--cream); }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: var(--font-m); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero { position: relative; min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+    .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 10rem 4rem 6rem; position: relative; z-index: 2; }
+    .hero-eyebrow { font-family: var(--font-m); font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+    .hero-name { font-family: var(--font-d); font-size: clamp(4.5rem, 7vw, 7.5rem); line-height: 0.92; letter-spacing: 0.03em; color: var(--cream); margin-bottom: 1rem; opacity: 0; animation: fadeUp 0.8s 0.35s forwards; }
+    .hero-name .gold { color: var(--gold); }
+    .hero-title { font-family: var(--font-b); font-size: 1.25rem; font-weight: 300; font-style: italic; color: var(--off); margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
+    .hero-stats { display: flex; gap: 2.5rem; margin-bottom: 3rem; opacity: 0; animation: fadeUp 0.8s 0.65s forwards; }
+    .stat-block { display: flex; flex-direction: column; }
+    .stat-num { font-family: var(--font-d); font-size: 2.8rem; color: var(--gold); line-height: 1; }
+    .stat-label { font-family: var(--font-m); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; line-height: 1.5; }
+    .stat-div { width: 1px; background: rgba(201,168,76,0.25); align-self: stretch; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.8s forwards; }
+    .btn-primary { display: inline-block; padding: 0.85rem 2.2rem; background: var(--gold); color: var(--navy); font-family: var(--font-m); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; transition: background 0.2s, transform 0.2s; }
+    .btn-primary:hover { background: var(--gold2); color: var(--navy); transform: translateY(-2px); }
+    .btn-outline { display: inline-block; padding: 0.85rem 2.2rem; border: 1px solid rgba(201,168,76,0.4); color: var(--gold); font-family: var(--font-m); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; transition: border-color 0.2s, background 0.2s, transform 0.2s; }
+    .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); transform: translateY(-2px); }
+    .hero-right { position: relative; overflow: hidden; }
+    .hero-right::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to right, var(--navy) 0%, transparent 35%), linear-gradient(to top, var(--navy) 0%, transparent 30%); }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 0; animation: fadeIn 1.2s 0.4s forwards; }
+    .hero-badge { position: absolute; bottom: 3rem; right: 3rem; z-index: 2; border: 1px solid rgba(201,168,76,0.3); background: rgba(13,27,42,0.85); backdrop-filter: blur(8px); padding: 1rem 1.5rem; text-align: center; opacity: 0; animation: fadeIn 0.8s 1s forwards; }
+    .badge-label { font-family: var(--font-m); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 0.3rem; }
+    .badge-val { font-family: var(--font-d); font-size: 1.3rem; color: var(--gold); letter-spacing: 0.08em; line-height: 1.2; }
+
+    /* SHARED SECTION */
+    section { position: relative; z-index: 1; }
+    .section-inner { max-width: 1100px; margin: 0 auto; padding: 7rem 2rem; }
+    .section-label { font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; display: block; }
+    .section-heading { font-family: var(--font-d); font-size: clamp(2.5rem, 4vw, 4rem); letter-spacing: 0.05em; color: var(--cream); margin-bottom: 3rem; line-height: 1; }
+
+    /* ABOUT */
+    #about { background: var(--navy2); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: start; }
+    .about-img-wrap { position: relative; }
+    .about-img-wrap::after { content: ''; position: absolute; top: 1.2rem; left: 1.2rem; right: -1.2rem; bottom: -1.2rem; border: 1px solid rgba(201,168,76,0.25); z-index: 0; }
+    .about-img { position: relative; z-index: 1; width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; filter: grayscale(15%); }
+    .about-caption { font-family: var(--font-m); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 1rem; position: relative; z-index: 1; }
+    .about-text p { color: var(--off); font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 300; }
+    .about-text p strong { color: var(--gold); font-weight: 600; }
+    .about-text p em { font-style: italic; color: var(--cream); }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 2.5rem; }
+    .skill-tag { font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 0.5rem 0.75rem; border: 1px solid rgba(201,168,76,0.15); background: rgba(201,168,76,0.04); }
+    .skill-tag::before { content: '↗ '; color: var(--gold); }
+
+    /* PORTFOLIO */
+    #portfolio { background: var(--navy); }
+    .portfolio-intro { max-width: 680px; margin-bottom: 1.5rem; font-size: 1.1rem; font-weight: 300; color: var(--off); }
+    .portfolio-group-label { font-family: var(--font-m); font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid rgba(201,168,76,0.15); padding-bottom: 0.75rem; margin-bottom: 0; display: block; }
+    .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: rgba(201,168,76,0.12); margin-bottom: 0; }
+    .project-card { background: var(--navy2); padding: 2.5rem; position: relative; overflow: hidden; transition: background 0.3s; display: flex; flex-direction: column; }
+    .project-card:hover { background: var(--slate); }
+    .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--gold); transition: height 0.3s; }
+    .project-card:hover::before { height: 100%; }
+    .project-card.production { border-top: 2px solid var(--gold); }
+    .production-badge { display: inline-block; font-family: var(--font-m); font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy); background: var(--gold); padding: 0.2rem 0.7rem; margin-bottom: 0.75rem; align-self: flex-start; }
+    .project-type { font-family: var(--font-m); font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .project-title { font-family: var(--font-d); font-size: 1.6rem; letter-spacing: 0.05em; color: var(--cream); line-height: 1.1; margin-bottom: 1rem; }
+    .project-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.6; flex: 1; margin-bottom: 1.5rem; }
+    .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .tag { font-family: var(--font-m); font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); background: var(--gold); padding: 0.2rem 0.6rem; }
+    .project-link { font-family: var(--font-m); font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); display: inline-flex; align-items: center; gap: 0.5rem; transition: gap 0.2s; margin-top: auto; }
+    .project-link:hover { gap: 0.8rem; color: var(--gold2); }
+    .project-link::after { content: '→'; }
+
+    /* EXPERIENCE */
+    #experience { background: var(--navy2); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,0.1)); }
+    .timeline-item { position: relative; padding: 0 0 3.5rem 3rem; }
+    .timeline-item::before { content: ''; position: absolute; left: -4px; top: 8px; width: 9px; height: 9px; background: var(--gold); border-radius: 50%; }
+    .timeline-date { font-family: var(--font-m); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+    .timeline-role { font-family: var(--font-d); font-size: 1.6rem; letter-spacing: 0.04em; color: var(--cream); line-height: 1.1; }
+    .timeline-org { font-size: 1rem; color: var(--muted); margin-bottom: 0.75rem; font-style: italic; }
+    .timeline-desc { font-size: 0.98rem; color: var(--off); font-weight: 300; max-width: 640px; line-height: 1.7; }
+    .timeline-desc strong { color: var(--gold); font-weight: 600; }
+
+    /* CONTACT */
+    #contact { background: var(--navy); text-align: center; }
+    .contact-inner { max-width: 680px; margin: 0 auto; padding: 7rem 2rem; }
+    .contact-sub { font-size: 1.1rem; font-weight: 300; color: var(--off); margin-bottom: 3rem; font-style: italic; }
+    .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer { background: var(--navy); border-top: 1px solid rgba(201,168,76,0.1); padding: 2rem 4rem; display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { font-family: var(--font-d); font-size: 1.1rem; letter-spacing: 0.1em; color: var(--muted); }
+    .footer-copy { font-family: var(--font-m); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--muted); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .reveal { opacity: 1; transform: none; transition: opacity 0.7s ease, transform 0.7s ease; }
+    .js-loaded .reveal { opacity: 0; transform: translateY(24px); }
+    .js-loaded .reveal.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.62rem; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 8rem 2rem 4rem; }
+      .hero-right { height: 55vw; }
+      .about-grid { grid-template-columns: 1fr; }
+      .project-grid { grid-template-columns: 1fr 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { gap: 0.8rem; }
+      .hero-stats { gap: 1.2rem; }
+      .stat-num { font-size: 2rem; }
+      .project-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SWIMMING<span>IN</span>DATA</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="https://thebrianjohns.github.io/Brian%20Johns%20-%20Resume.pdf" target="_blank">Résumé</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Data Scientist · Sports Analyst · 3× Olympian</p>
+    <h1 class="hero-name">BRIAN<br><span class="gold">JOHNS</span></h1>
+    <p class="hero-title">Where elite athletic intelligence meets data science</p>
+    <div class="hero-stats">
+      <div class="stat-block">
+        <span class="stat-num">3×</span>
+        <span class="stat-label">Olympian<br>CAN</span>
+      </div>
+      <div class="stat-div"></div>
+      <div class="stat-block">
+        <span class="stat-num">WR</span>
+        <span class="stat-label">World Record<br>Breaker</span>
+      </div>
+      <div class="stat-div"></div>
+      <div class="stat-block">
+        <span class="stat-num">25+</span>
+        <span class="stat-label">Years in Elite Sport<br>Athlete · Coach · Analyst</span>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#portfolio" class="btn-primary">View Portfolio</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="Brian_Johns_Head_Shot.jpeg" alt="Brian Johns" class="hero-img" />
+    <div class="hero-badge">
+      <span class="badge-label">Current Role</span>
+      <span class="badge-val">HEAD OF<br>COACHING SCIENCE</span>
+      <span class="badge-label" style="margin-top:0.4rem;">FORM Swim</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <img src="Johns070808Cer0256.JPG" alt="Brian Johns carrying the Canadian flag" class="about-img" />
+        <p class="about-caption">Flag Bearer — Canada · 2007 Military World Games, Bangkok</p>
+      </div>
+      <div class="about-text">
+        <span class="section-label reveal">About</span>
+        <h2 class="section-heading reveal">The<br>Intersection</h2>
+        <p class="reveal">
+          I've spent my life at the intersection of <strong>athletic performance and analytical thinking</strong>. As a three-time Canadian Olympian and World Record breaker in the 200m Individual Medley, I lived inside elite sport data before "sports analytics" was a job title — understanding stroke mechanics, training loads, and race strategy through feel and experience.
+        </p>
+        <p class="reveal">
+          Now I translate that domain expertise into <strong>data science</strong>. After a Master's in Coaching Science at UBC and a Data Science diploma at BrainStation, I joined <em>FORM Swim</em> as Head of Coaching Science — where I've helped build production systems used by hundreds of thousands of athletes worldwide.
+        </p>
+        <p class="reveal">
+          I bring something rare to sports analytics teams: <strong>I've been the athlete, the coach, and the data scientist</strong>. I understand what metrics actually matter at the elite level, and I know how to turn them into systems that drive real performance outcomes.
+        </p>
+        <div class="skills-grid reveal">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Machine Learning</span>
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">NLP</span>
+          <span class="skill-tag">AWS / Spark</span>
+          <span class="skill-tag">Scikit-Learn</span>
+          <span class="skill-tag">PyTorch</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-inner">
+    <span class="section-label reveal">Portfolio</span>
+    <h2 class="section-heading reveal">Selected Work</h2>
+    <p class="portfolio-intro reveal">
+      A selection of data science projects spanning sports analytics, NLP, and performance modelling — from production systems used by real athletes to independent research and analysis.
+    </p>
+
+    <!-- Professional Work -->
+    <p class="portfolio-group-label reveal">Professional Work — Production Systems</p>
+    <div class="project-grid">
+
+      <div class="project-card production reveal">
+        <span class="production-badge">Live Product · FORM Swim</span>
+        <p class="project-type">Metric Design · Statistical Validation · Content</p>
+        <h3 class="project-title">FORM Score</h3>
+        <p class="project-desc">Devised and mathematically validated FORM Score — a 1–100 composite metric that quantifies swimming technique efficiency in a single interpretable number. Improved on legacy metrics like SWOLF by normalising across stroke types and distances, then designed the scaling methodology to map raw performance variables onto a range that is both statistically rigorous and intuitive for athletes at every level. Validated the model against real athlete data before production release. Wrote all supporting content: educational blog series, in-app copy, and video explanations now embedded in the FORM app.</p>
+        <div class="project-tags">
+          <span class="tag">Metric Design</span>
+          <span class="tag">Statistical Modelling</span>
+          <span class="tag">Python</span>
+          <span class="tag">Data Validation</span>
+        </div>
+        <a href="https://www.formswim.com/blogs/all/improve-your-swimming-technique-with-form-score" target="_blank" class="project-link">Read the Blog</a>
+      </div>
+
+      <div class="project-card production reveal">
+        <span class="production-badge">Live Product · FORM Swim</span>
+        <p class="project-type">Classification · SQL · Python</p>
+        <h3 class="project-title">Swimmer Type Classification</h3>
+        <p class="project-desc">Designed the complete framework for classifying swimmers into eight distinct performance types using three variables: FORM Score, Distance Per Stroke (DPS), and Stroke Rate (SR). Used SQL to analyse population-level data across FORM's athlete base and Python to build the classification logic — which now drives personalised coaching recommendations inside HeadCoach. Designed and wrote the full educational content system explaining each Swimmer Type, what it means for training, and how athletes progress between types over time.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Classification</span>
+          <span class="tag">Feature Engineering</span>
+        </div>
+        <a href="https://www.formswim.com/blogs/all/introducing-headcoach" target="_blank" class="project-link">Read the Blog</a>
+      </div>
+
+      <div class="project-card production reveal">
+        <span class="production-badge">Live Product · FORM Swim</span>
+        <p class="project-type">Algorithm Design · Python · JSON</p>
+        <h3 class="project-title">HeadCoach Workouts</h3>
+        <p class="project-desc">Built the personalised workout generation engine at the core of FORM's HeadCoach feature. Wrote a Python script that takes a swimmer's objective (race preparation across pool, open water, and triathlon formats; or general improvement goals such as technique or fitness), their performance data, and their Swimmer Type to select from a library of over 200 workout templates — each written in JSON — and generate a personalised training session. Worked directly with the engineering team through the full development and deployment cycle. HeadCoach Workouts became one of the leading indicators of long-term subscription retention.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">JSON</span>
+          <span class="tag">Algorithm Design</span>
+          <span class="tag">Personalisation</span>
+        </div>
+        <a href="https://www.formswim.com/blogs/all/revolutionize-swim-training-with-headcoach-workouts" target="_blank" class="project-link">Read the Blog</a>
+      </div>
+
+      <div class="project-card production reveal">
+        <span class="production-badge">Live Product · FORM Swim</span>
+        <p class="project-type">System Design · Training Science · Domain Expertise</p>
+        <h3 class="project-title">HeadCoach Plans</h3>
+        <p class="project-desc">Designed the full logic for FORM's personalised training plan system — sequencing HeadCoach Workouts into structured multi-week plans tailored to a swimmer's goals. Developed adaptive logic covering race-specific preparation (with and without a fixed race date) and general improvement pathways, providing engineering with the complete decision framework through detailed specifications and close collaboration. The system delivers elite-level personalised coaching at scale, and contributed to measurable improvements in trial-to-subscription conversion and subscriber retention.</p>
+        <div class="project-tags">
+          <span class="tag">System Design</span>
+          <span class="tag">Training Science</span>
+          <span class="tag">Personalisation</span>
+          <span class="tag">Domain Expertise</span>
+        </div>
+        <a href="https://www.formswim.com/blogs/all/personalized-training-with-headcoach-plans" target="_blank" class="project-link">Read the Blog</a>
+      </div>
+
+    </div>
+
+    <!-- Independent Projects -->
+    <p class="portfolio-group-label reveal" style="margin-top:3rem;">Independent Research &amp; Analysis</p>
+    <div class="project-grid">
+
+      <div class="project-card reveal">
+        <p class="project-type">Sports Analytics · Capstone</p>
+        <h3 class="project-title">NHL Player Salary Prediction</h3>
+        <p class="project-desc">Used NHL basic and advanced statistics to predict and evaluate player cap hits using Linear Regression, XGBoost, Random Forest, and Clustering. Identified which performance metrics most strongly predict market value and where players are over- or under-paid relative to their on-ice contribution.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">XGBoost</span>
+          <span class="tag">Random Forest</span>
+          <span class="tag">Clustering</span>
+        </div>
+        <a href="https://github.com/thebrianjohns/hockeycaphits" target="_blank" class="project-link">View on GitHub</a>
+      </div>
+
+      <div class="project-card reveal">
+        <p class="project-type">Sports Analytics · Tableau</p>
+        <h3 class="project-title">PWHPA Goalie Scouting Dashboard</h3>
+        <p class="project-desc">An interactive Tableau dashboard for professional women's hockey goalie scouting and evaluation. Visualises key performance metrics to support roster and recruitment decisions, bringing a data-driven lens to a position historically evaluated by eye.</p>
+        <div class="project-tags">
+          <span class="tag">Tableau</span>
+          <span class="tag">Hockey Analytics</span>
+          <span class="tag">Scouting</span>
+        </div>
+        <a href="https://public.tableau.com/app/profile/brian.johns6814/viz/PWHPA_16877367191190/Dashboard1" target="_blank" class="project-link">View Dashboard</a>
+      </div>
+
+      <div class="project-card reveal">
+        <p class="project-type">NLP · Classification</p>
+        <h3 class="project-title">Mavericks Tweet Sentiment Analysis</h3>
+        <p class="project-desc">Combined Twitter data with NBA game results to perform multi-class sentiment analysis using NLP, SMOTE, Logistic Regression, and Naive Bayes. Explored how on-court performance drives real-time fan sentiment and the asymmetry between wins and losses in social response.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">NLP</span>
+          <span class="tag">SMOTE</span>
+          <span class="tag">Classification</span>
+        </div>
+        <a href="/2023/05/18/mavstweets-part-3.html" class="project-link">Read Case Study</a>
+      </div>
+
+      <div class="project-card reveal">
+        <p class="project-type">Data Analysis · Visualization</p>
+        <h3 class="project-title">Vancouver Accident Analysis</h3>
+        <p class="project-desc">Analysed ICBC accident data across Vancouver neighbourhoods using MySQL window functions and CTEs, then built Tableau dashboards to surface neighbourhood-level risk patterns and trends for city planners and insurers.</p>
+        <div class="project-tags">
+          <span class="tag">SQL</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Tableau</span>
+        </div>
+        <a href="/2022/08/16/icbc-part-2.html" class="project-link">Read Case Study</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <span class="section-label reveal">Experience &amp; Education</span>
+    <h2 class="section-heading reveal">The Full Picture</h2>
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <p class="timeline-date">Oct 2022 – Present</p>
+        <h3 class="timeline-role">Head of Coaching Science</h3>
+        <p class="timeline-org">FORM Swim · Vancouver, BC</p>
+        <p class="timeline-desc">Domain expert bridging elite swimming knowledge and data science across all product teams. Built the <strong>FORM Score metric</strong>, the <strong>Swimmer Type classification system</strong>, the <strong>HeadCoach Workout generation engine</strong>, and the <strong>HeadCoach Plans</strong> logic — four interconnected production systems now used by hundreds of thousands of athletes globally. Developed models with the Analytics team to evaluate training programme efficacy and define athlete performance KPIs.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <p class="timeline-date">Apr 2022 – Jul 2022</p>
+        <h3 class="timeline-role">Teacher's Assistant — Data Science</h3>
+        <p class="timeline-org">BrainStation · Vancouver, BC</p>
+        <p class="timeline-desc">Selected based on academic performance to mentor students in SQL, Tableau, machine learning, and big data analysis. Taught supplementary sessions on Python and ML model implementation.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <p class="timeline-date">Sep 2016 – Oct 2021</p>
+        <h3 class="timeline-role">Director of Swimming / Head Coach</h3>
+        <p class="timeline-org">Vancouver Pacific Swim Club · Vancouver, BC</p>
+        <p class="timeline-desc">Led athlete development programming and stakeholder management across coaches, parents, board members, and facilities. Maintained operational continuity through the pandemic.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <p class="timeline-date">2000 – 2012</p>
+        <h3 class="timeline-role">Professional Swimmer · 3× Olympian</h3>
+        <p class="timeline-org">Swimming Canada · International</p>
+        <p class="timeline-desc">Represented Canada at three Olympic Games. <strong>World Record breaker</strong> in the 200m Individual Medley. Competed at the highest level of international sport for over a decade, developing a deep analytical understanding of performance metrics, physiological modelling, and what it takes to optimise human athletic output.</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <p class="timeline-date">2022</p>
+        <h3 class="timeline-role">Diploma, Data Science</h3>
+        <p class="timeline-org">BrainStation · Vancouver, BC</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <p class="timeline-date">2009 – 2011</p>
+        <h3 class="timeline-role">Master's in Kinesiology — Coaching Science</h3>
+        <p class="timeline-org">University of British Columbia</p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <p class="timeline-date">2001 – 2009</p>
+        <h3 class="timeline-role">Bachelor's in Human Kinetics</h3>
+        <p class="timeline-org">University of British Columbia</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <span class="section-label reveal">Contact</span>
+    <h2 class="section-heading reveal">Let's Talk<br>Sports Data</h2>
+    <p class="contact-sub reveal">Open to roles in sports analytics, performance science, and data science — particularly with teams, leagues, and organisations where deep athletic domain knowledge makes the difference.</p>
+    <div class="contact-links reveal">
+      <a href="mailto:the.brian.johns@gmail.com" class="btn-primary">Email Me</a>
+      <a href="https://linkedin.com/in/thebrianjohns" target="_blank" class="btn-outline">LinkedIn</a>
+      <a href="https://github.com/thebrianjohns" target="_blank" class="btn-outline">GitHub</a>
+      <a href="https://thebrianjohns.github.io/Brian%20Johns%20-%20Resume.pdf" target="_blank" class="btn-outline">Résumé</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SWIMMING IN DATA</div>
+  <p class="footer-copy">© Brian Johns 2026 · Vancouver, BC</p>
+</footer>
+
+<script>
+  document.body.classList.add('js-loaded');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const siblings = [...entry.target.parentElement.children].filter(el => el.classList.contains('reveal'));
+        const idx = siblings.indexOf(entry.target);
+        entry.target.style.transitionDelay = `${idx * 0.08}s`;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
